@@ -23,7 +23,7 @@ This is the forth course of the deep learning specialization at [Coursera](https
       * [Classic networks](#classic-networks)
       * [Residual Networks (ResNets)](#residual-networks-resnets)
       * [Why ResNets work](#why-resnets-work)
-      * [Network in Network and 1�1 convolutions](#network-in-network-and-1-X-1-convolutions)
+      * [Network in Network and 1×1 convolutions](#network-in-network-and-1-X-1-convolutions)
       * [Inception network motivation](#inception-network-motivation)
       * [Inception network (GoogleNet)](#inception-network-googlenet)
       * [Using Open-Source Implementation](#using-open-source-implementation)
@@ -279,6 +279,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - s : stride.
   - Padding are rarely uses here.
   - Max or average pooling.
+  **Note : In Pooling, there are no parameters for Gradient Descent to learn.**
 
 ### Convolutional neural network example
 
@@ -322,7 +323,7 @@ Here are the course summary as its given on the course [link](https://www.course
 
 - Two main advantages of Convs are:
   - Parameter sharing.
-    - A feature detector (such as a vertical edge detector) that’s useful in one part of the image is probably useful in another part of the image.
+    - A feature detector (such as a vertical edge detector) thatâs useful in one part of the image is probably useful in another part of the image.
   - sparsity of connections.
     - In each layer, each output value depends only on a small number of inputs which makes it translation invariance.
 - Putting it all together:
@@ -392,8 +393,8 @@ Here are the course summary as its given on the course [link](https://www.course
   - A modification for AlexNet.
   - Instead of having a lot of hyperparameters lets have some simpler network.
   - Focus on having only these blocks:
-    - CONV = 3×3 filter, s = 1, same  
-    - MAX-POOL = 2×2 , s = 2
+    - CONV = 3Ã3 filter, s = 1, same  
+    - MAX-POOL = 2Ã2 , s = 2
   - Here are the architecture:
     - ![](Images/07.png)
   - This network is large even by modern standards. It has around 138 million parameters.
@@ -663,7 +664,7 @@ Here are the course summary as its given on the course [link](https://www.course
     - Given an image we want to detect all the object in the image that belong to a specific classes and give their location. An image can contain more than one object with different classes.
     - ![](Images/ObjectDetection.png)
   - **Semantic Segmentation**:
-    - We want to Label each pixel in the image with a category label. Semantic Segmentation Don’t differentiate instances, only care about pixels. It detects no objects just pixels.
+    - We want to Label each pixel in the image with a category label. Semantic Segmentation Donât differentiate instances, only care about pixels. It detects no objects just pixels.
     - If there are two objects of the same class is intersected, we won't be able to separate them.
     - ![](Images/SemanticSegmentation.png)
   - **Instance Segmentation**
@@ -842,10 +843,10 @@ Here are the course summary as its given on the course [link](https://www.course
 - Non-max suppression algorithm:
   1. Lets assume that we are targeting one class as an output.
   2. Y shape should be `[Pc, bx, by, bh, hw]` Where Pc is the probability if that object occurs.
-  3. Discard all boxes with `Pc ≤ 0.6`  
+  3. Discard all boxes with `Pc â¤ 0.6`  
   4. While there are any remaining boxes:
      1. Pick the box with the largest Pc Output that as a prediction.
-     2. Discard any remaining box with `IoU ≥0.5` with the box output in the previous step.
+     2. Discard any remaining box with `IoU â¥0.5` with the box output in the previous step.
 - If there are multiple classes/object types `c` you want to detect, you should run the Non-max suppression `c` times.
 
 ### Anchor Boxes
@@ -859,8 +860,8 @@ Here are the course summary as its given on the course [link](https://www.course
   - Y = `[Pc, bx, by, bh, bw, c1, c2, c3, Pc, bx, by, bh, bw, c1, c2, c3]`  We simply have repeated  the one anchor Y.
   - The two anchor boxes you choose should be known as a shape:
     - ![](Images/28.png)
-- So Previously, each object in training image is assigned to grid cell that contains that object’s midpoint.
-- With two anchor boxes, Each object in training image is assigned to grid cell that contains object’s midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
+- So Previously, each object in training image is assigned to grid cell that contains that objectâs midpoint.
+- With two anchor boxes, Each object in training image is assigned to grid cell that contains objectâs midpoint and anchor box for the grid cell with <u>highest IoU</u>. You have to check where your object should be based on its rectangle closest to which anchor box.
 - Example of data:
   - ![](Images/29.png)
   - Where the car was near the anchor 2 than anchor 1.
@@ -1143,7 +1144,7 @@ Here are the course summary as its given on the course [link](https://www.course
   - Recognition:
     - Has a database of K persons
     - Get an input image
-    - Output ID if the image is any of the K persons (or “not recognized”)
+    - Output ID if the image is any of the K persons (or ânot recognizedâ)
     - "who is this person?"
 - We can use a face verification system to make a face recognition system. The accuracy of the verification system has to be high (around 99.9% or more) to be use accurately within a recognition system because the recognition system accuracy will be less than the verification system given a K persons. 
 
@@ -1237,7 +1238,7 @@ Here are the course summary as its given on the course [link](https://www.course
 - Visualizing what a deep network is learning:
   - Given this AlexNet like Conv net:
     - ![](Images/38.png)
-  - Pick a unit in layer l. Find the nine image patches that maximize the unit’s activation. 
+  - Pick a unit in layer l. Find the nine image patches that maximize the unitâs activation. 
     - Notice that a hidden unit in layer one will see relatively small portion of NN, so if you plotted it it will match a small image in the shallower layers while it will get larger image in deeper layers.
   - Repeat for other units and layers.
   - It turns out that layer 1 are learning the low level representations like colors and edges.
@@ -1259,8 +1260,8 @@ Here are the course summary as its given on the course [link](https://www.course
   - alpha and beta are relative weighting to the similarity and these are hyperparameters.
 - Find the generated image G:
   1. Initiate G randomly
-     - For example G: 100×100×3
-  2. Use gradient descent to minimize `𝐽(𝐺)`
+     - For example G: 100Ã100Ã3
+  2. Use gradient descent to minimize `ð½(ðº)`
      - `G = G - dG`  We compute the gradient image and use gradient decent to minimize the cost function.
 - The iterations might be as following image:
   - To Generate this:
@@ -1271,18 +1272,18 @@ Here are the course summary as its given on the course [link](https://www.course
 #### Content Cost Function
 
 - In the previous section we showed that we need a cost function for the content image and the style image to measure how similar is them to each other.
-- Say you use hidden layer 𝑙 to compute content cost. 
-  - If we choose 𝑙 to be small (like layer 1), we will force the network to get similar output to the original content image.
-  - In practice 𝑙 is not to shallow and not too deep but in the middle.
+- Say you use hidden layer ð to compute content cost. 
+  - If we choose ð to be small (like layer 1), we will force the network to get similar output to the original content image.
+  - In practice ð is not to shallow and not too deep but in the middle.
 - Use pre-trained ConvNet. (E.g., VGG network)
-- Let `𝑎(c)[l]` and `𝑎(G)[l]` be the activation of layer 𝑙 on the images.
-- If `𝑎(c)[l]` and `𝑎(G)[l]` are similar then they will have the same content
-  - `J(C, G) at a layer l = 1/2 || 𝑎(c)[l] - 𝑎(c)[G] ||2`
+- Let `ð(c)[l]` and `ð(G)[l]` be the activation of layer ð on the images.
+- If `ð(c)[l]` and `ð(G)[l]` are similar then they will have the same content
+  - `J(C, G) at a layer l = 1/2 || ð(c)[l] - ð(c)[G] ||2`
 
 #### Style Cost Function
 
 - Meaning of the ***style*** of an image:
-  - Say you are using layer 𝑙’s activation to measure ***style***.
+  - Say you are using layer ðâs activation to measure ***style***.
   - Define style as correlation between **activations** across **channels**. 
     - That means given an activation like this:
       - ![](Images/42.png)
