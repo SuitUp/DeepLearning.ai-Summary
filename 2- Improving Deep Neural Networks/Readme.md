@@ -192,6 +192,19 @@ Here are the course summary as its given on the course [link](https://www.course
 
 - At test time we don't run the "Inverse dropout"
 
+## How to choose the number of neurons/units in the hidden layer(avoiding overfitting) :
+
+**Rule of thumb 1** : Take the average of number of units in Input layer and the output layer.
+
+**Rule of thumb 2** : Use this formula : 
+**Nh=Ns/(α∗(Ni+No))**
+ where
+Ni = number of input neurons.
+No = number of output neurons.
+Ns = number of samples in training data set.
+α = an arbitrary scaling factor usually 2-10.
+
+
 ### Understanding Dropout
 
 - Can't rely on one feature so have to spread out weights
